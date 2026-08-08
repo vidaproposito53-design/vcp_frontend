@@ -3,6 +3,7 @@ import { provideHttpClient, HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { environment } from './environments/environment';
 
 interface RegistrationResponse {
   id: number;
@@ -351,7 +352,7 @@ export class AppComponent implements OnInit {
   }
 
   loadRegistrations(): void {
-    this.http.get<RegistrationResponse[]>('http://localhost:8080/api/registrations').subscribe({
+    this.http.get<RegistrationResponse[]>(`${environment.apiUrl}/api/registrations`).subscribe({
       next: (data) => {
         // Sort registrations to show newest first
         this.registrations = data.sort((a, b) => b.id - a.id);
@@ -411,7 +412,7 @@ export class AppComponent implements OnInit {
       setTimeout(() => {
         this.simulationSubstep = 3;
 
-        this.http.post<RegistrationResponse>('http://localhost:8080/api/registrations', this.registrationForm.getRawValue()).subscribe({
+        this.http.post<RegistrationResponse>(`${environment.apiUrl}/api/registrations`, this.registrationForm.getRawValue()).subscribe({
           next: (res) => {
             // Step 3: Backend succeeded and simulated the payment
             setTimeout(() => {

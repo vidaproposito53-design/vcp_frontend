@@ -57,6 +57,14 @@ ng serve  or npx ng serve
 
 La aplicación estará disponible en `http://localhost:4200`.
 
+La URL del backend se puede sobrescribir al construir la imagen Docker:
+
+```bash
+docker build --build-arg BACKEND_URL=https://api.example.com -t classical-events-frontend .
+```
+
+En desarrollo local se usa `http://localhost:8080` por defecto.
+
 ## Build
 
 ```bash
